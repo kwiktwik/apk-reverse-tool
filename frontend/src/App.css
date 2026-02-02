@@ -1,0 +1,177 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.device-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.device-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.37);
+}
+
+.device-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.5);
+}
+
+.button {
+  margin: 10px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 16px;
+}
+
+.button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.button:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+}
+
+.package-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.tool-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.package-card, .tool-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.package-card:hover, .tool-card:hover {
+  transform: scale(1.05);
+}
+
+.tool-card.processing {
+  border-color: #ffcc00;
+}
+
+.spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.split-layout {
+  display: flex;
+  height: calc(100vh - 100px);
+  gap: 0;
+}
+
+.left-panel, .right-panel {
+  flex: 1;
+  width: 50%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .split-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  .left-panel, .right-panel {
+    width: 100%;
+    height: 50vh;
+  }
+}
+
+.logs-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.logs {
+  flex: 1;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  color: #fff;
+}
+
+.log-line {
+  margin-bottom: 5px;
+}
+
+.apk-info {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}

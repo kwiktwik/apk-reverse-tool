@@ -1,0 +1,132 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+# Note: package-lock.json should be committed for reproducible builds
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+*.tsbuildinfo
+*.js.map
+*.d.ts.map
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing
+coverage/
+*.lcov
+.nyc_output/
+.jest/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.local
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+.cache/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# APK and reverse engineering artifacts
+*.apk
+*.dex
+*.smali
+*.apks
+*.aab
+*.zip
+!package.json
+!package-lock.json
+
+# NestJS specific
+dist/
+coverage/
+
+# Vite specific
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variable files
+.env.development
+.env.production
+.env.test
+
+# parcel-bundler cache
+.parcel-cache
+
+# Next.js (if ever used)
+.next/
+out/
+
+# Nuxt.js (if ever used)
+.nuxt/
+
+# Storybook build outputs
+storybook-static/
+
+# Temporary folders
+tmp/
+temp/
