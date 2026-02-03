@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';
 import { LogsGateway } from '../logs/logs.gateway';
+import { ApkService } from '../apk/apk.service';
 
 const archiver = require('archiver');
 
@@ -12,30 +13,11 @@ const execAsync = promisify(exec);
 
 @Injectable()
 export class AdbService {
-  constructor(private logsGateway: LogsGateway) {}
+  constructor(
+    private logsGateway: LogsGateway,
+    private apkService: ApkService,
+  ) { }
 
-  private async ensureSaiCli(): Promise<string> {
-    const saiPath = '/tmp/sai-cli.jar';
-    if (fs.existsSync(saiPath)) {
-      return saiPath;
-    }
-    this.logsGateway.emitLog('system', 'Downloading SAI CLI...');
-    const url = 'https://github.com/Aefyr/SAI/releases/download/3.10/sai-cli.jar';
-    return new Promise((resolve, reject) => {
-      const file = fs.createWriteStream(saiPath);
-      https.get(url, (response) => {
-        response.pipe(file);
-        file.on('finish', () => {
-          file.close();
-          this.logsGateway.emitLog('system', 'SAI CLI downloaded.');
-          resolve(saiPath);
-        });
-      }).on('error', (err) => {
-        fs.unlink(saiPath, () => {});
-        reject(err);
-      });
-    });
-  }
 
   private async ensureApktool(): Promise<string> {
     const apktoolPath = '/tmp/apktool.jar';
@@ -54,7 +36,7 @@ export class AdbService {
           resolve(apktoolPath);
         });
       }).on('error', (err) => {
-        fs.unlink(apktoolPath, () => {});
+        fs.unlink(apktoolPath, () => { });
         reject(err);
       });
     });
@@ -129,9 +111,14 @@ export class AdbService {
       // Copy to tempDir
       fs.copyFileSync(pulledPath, path.join(tempDir, path.basename(pulledPath)));
     }
-    const saiPath = await this.ensureSaiCli();
     const outputApk = path.join(tempDir, `${packageName}_bundled.apk`);
-    await execAsync(`java -jar ${saiPath} merge -i ${tempDir} -o ${outputApk}`);
+
+    try {
+      await this.apkService.mergeApks(tempDir, outputApk);
+    } catch (e) {
+      this.logsGateway.emitLog(packageName, `Merge failed: ${e.message}`);
+      throw e;
+    }
     this.logsGateway.emitLog(packageName, 'Bundled to single APK.');
     const zipPath = `/tmp/${packageName}_bundled_${Date.now()}.zip`;
     await this.createZip([outputApk], zipPath, packageName);
